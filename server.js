@@ -23,6 +23,19 @@ connectDB();
 //res.send() sends data to the browser
 app.get('/', (req, res) => res.send('Successful API connection!'));
 
+//the next APIs are created after creating your own apis first.
+//read the last two lines of this page.
+
+//Define routes
+//to define our route we say app.use
+//then we pass it the route for the request 'api/users'
+//which refers to the '/' in users.js and
+// where to find the user's file is in the second parameter
+app.use('/api/users', require('./routes/api/users'));
+app.use('/api/auth', require('./routes/api/auth'));
+app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/posts', require('./routes/api/posts'));
+
 //what this does is look for an environment variable
 //called PORT which will transfer the PORT number
 //to Heroku. The || (or) symbol allows us to run
@@ -59,3 +72,9 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 
 //now, we don't want to clutter up this file with our db connection
 // logic. So, we create a file in config named db.js
+
+////finished everything from db.js to server.js?
+//let's hop on over to our new creation:
+//create a folder named routes. inside routes we create
+// an api folder full of our api models
+//let's start with users.js auth.js post.js and profile.js
