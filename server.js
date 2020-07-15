@@ -6,16 +6,17 @@ const app = express();
 //this next line makes way more sense
 // after completing everything else on this page
 //the very async function we created was exported, right?
-//now that exported data is in this connectDB variable
-// since it's in a different folder we have to say where
-// our connectDB function is ./config/db
+//now that this variable holds our exported data
+// we have to say where
+// our connectDB function is --> ./config/db
 const connectDB = require('./config/db');
 
 ///////////////////////////////////////////////////////////////////////////////////
 //now we that we imported our connectDB function we can actually just call it.
 //and you should see your connection confirmation string from the try in db.js
 connectDB();
-
+//init middleware
+app.use(express.json({ extended: false })); //<--allows us to get data in request.body
 //this is an endpoint for first test
 //takes a get request to /
 //the second parameter is our callback to our
@@ -78,3 +79,9 @@ app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
 //create a folder named routes. inside routes we create
 // an api folder full of our api models
 //let's start with users.js auth.js post.js and profile.js
+
+//did you add your APIs to this page?
+// If so, create a new folder in the general project folder
+// name it models and add User.js naming convention for models
+// is always start with an uppercase
+// head on over to User.js
