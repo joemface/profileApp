@@ -22,8 +22,12 @@ const connectDB = async () => {
     //so the server awaits a promised response from db variable.
     //we also throw in a second paramater becuase of the fact that
     // we get a deprecation warning without it (useNewUrlParser)
+    //same with the others grouped with it. basically some features
+    //i'm using are old and need to be told to use modern versions
     await mongoose.connect(db, {
       useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
     });
     //the next string let's us know in the console that we're connected
     console.log('MongoDB Connected...');
