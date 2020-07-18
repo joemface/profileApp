@@ -64,7 +64,7 @@ router.post(
       //get user's gravatar
       //if valid user email, get their gravatar
       // we just need to pass the user's email to a method
-      // and we can get their gravatar
+      // and we can get their gravatar.
       //s is status. r is page rating (no nudes) d is default image
       //mm is just a default image icon. you could do 404 for image broken
       const avatar = gravatar.url(email, {
@@ -104,7 +104,7 @@ router.post(
       jwt.sign(
         payload,
         config.get('jwtSecret'),
-        { expiresIn: 3600 },
+        { expiresIn: 360000 },
         (err, token) => {
           if (err) throw err;
           res.json({ token });
@@ -139,3 +139,20 @@ module.exports = router;
 //by now you should be able to test http://localhost:5000/api/users
 //with valid raw data entered of the body as json format
 // and it will register the user in your Mongodb collections
+
+//{
+//"name":"Jon Doe",
+//"email":"jdoe@email.com",
+//"password":"password6"
+//}
+
+//    "token": eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYxMWY5MzQ0NjIyMzYwOWU4NzA4ZTkzIn0sImlhdCI6MTU5NTAyNzQzMywiZXhwIjoxNTk1Mzg3NDMzfQ.Xqeb2T6W_PRW1fRkJOHGKIwhqlZhu7a3M6NnDhseJmM
+//{
+//"status":"Junior Developer",
+//"company":"Microsoft",
+//"facebook":"https://facebook.com/jdoe",
+//"skills":"C, C#",
+//"location":"Los Angeles, CA",
+//"bio": "I am work.",
+//"githubusername":"jdoe"
+//}

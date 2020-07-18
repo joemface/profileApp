@@ -1,5 +1,6 @@
 //this is a model for a user's profile
 const mongoose = require('mongoose');
+
 const ProfileSchema = new mongoose.Schema({
   user: {
     //we can refer to a specific user by using mongoose

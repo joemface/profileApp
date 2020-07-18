@@ -27,6 +27,8 @@ module.exports = function (req, res, next) {
     //lastly call next
     next();
   } catch (err) {
-    res.status(401).json({ msg: 'Token is not valid. Authorization denied!' });
+    res
+      .status(401)
+      .json({ msg: 'Token is not valid. Authorization definitely denied!' });
   }
 };
