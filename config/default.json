@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://jmiranda:Damnu2hell@devconnector-dsgby.mongodb.net/<dbname>?retryWrites=true&w=majority",
-  "jwtSecret": "aen#B&!df346D3dh8"
+  "jwtSecret": "aen#B&!df346D3dh8",
+  "githubClientId": "fa8c17120bf0fc03ebd0",
+  "githubSecret": "c83eabd26a9b0ca44138a72ee58e75e38b267d9f"
 }

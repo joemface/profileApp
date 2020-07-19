@@ -8,6 +8,9 @@ const { check, validationResult } = require('express-validator');
 //to shape the payload to our user's profile
 const Profile = require('../../models/Profile');
 const User = require('../../models/User');
+//for the github repos we need request and config
+const request = require('request');
+const config = require('config');
 // @route   GET api/profile/me
 // @desc    Get current user's profile
 // @access  Private
@@ -354,6 +357,26 @@ router.delete('/education/:edu_id', auth, async (req, res) => {
     res.status(500).send('Server error. DELETE api/profile/education/edu_id');
   }
 });
+
+//we need to give this app Oauth on github to securely access repos.
+//go to https://github.com/settings/applications/new
+// for homepage URL and authorization callback URL
+// use http://localhost:5000
+//once you create the OAuth app you'll need the client ID
+//and the client secret for config/defualt.json.
+// the new variables are githubClientId and githubSecret
+
+// @route   GET api/profile/github/:username
+// @desc    Get user repos from github
+// @access  Public
+router.get('/github/:username', async(req,res)=>{
+  try {
+    
+  } catch (err) {
+    console.error(err.message):
+    res.status(500).send('Server error. GET api/github/:username')
+  }
+})
 //export the router
 module.exports = router;
 
