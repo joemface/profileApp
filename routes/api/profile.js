@@ -149,7 +149,7 @@ router.get('/user/:user_id', async (req, res) => {
   try {
     //we want to find a user by their ID and we do that
     //with findOne as well as taking the request parameters
-    // and passing it  to the variable user:
+    // and passing it to the variable user:
     const profile = await Profile.findOne({
       user: req.params.user_id,
     }).populate('user', ['name', 'avatar']);
@@ -237,6 +237,123 @@ router.put(
     }
   }
 );
+
+// @route   DELETE api/profile/experience/:exp_id
+// @desc    Delete experience on a user profile
+// @access  Private
+router.delete('/experience/:exp_id', auth, async (req, res) => {
+  try {
+    //get the profile of the logged in user
+    const profile = await Profile.findOne({ user: req.user.id });
+    //get the index
+    const removeIndex = profile.experience
+      .map((item) => item.id)
+      .indexOf(req.params.exp_id);
+    //splicing out the index, only one
+    profile.experience.splice(removeIndex, 1);
+    //save the change
+    await profile.save();
+
+    res.json(profile);
+
+    //so go to swagger
+    //in the json response, copy the _id of the experience
+    //you want to test deleting.
+    //make a DELETE request to
+    // http://localhost:5000/api/profile/experience/(that _id)
+    // add the token to the headers
+    // content-type not necessary
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error. DELETE api/profile/experience/exp_id');
+  }
+});
+
+// @route   PUT api/profile/education
+// @desc    Put education on a user profile
+// @access  Private
+router.put(
+  '/education',
+  [
+    auth,
+    [
+      //these four are required
+      check('school', 'School is required').not().isEmpty(),
+      check('degree', 'Degree is required').not().isEmpty(),
+      check('fieldofstudy', 'Field of study is required').not().isEmpty(),
+      check('from', 'From date is required').not().isEmpty(),
+    ],
+  ],
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+    }
+
+    const {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      current,
+      description,
+    } = req.body;
+
+    //creates a new object with the data the user submits
+    const newEdu = {
+      school,
+      degree,
+      fieldofstudy,
+      from,
+      to,
+      current,
+      description,
+    };
+
+    try {
+      const profile = await Profile.findOne({ user: req.user.id });
+      //unshift pushes onto the beginning
+      profile.education.unshift(newEdu);
+      await profile.save();
+      res.json(profile);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server error. PUT api/profile/education');
+    }
+  }
+);
+
+// @route   DELETE api/profile/educatoin/:edu_id
+// @desc    Delete education on a user profile
+// @access  Private
+router.delete('/education/:edu_id', auth, async (req, res) => {
+  try {
+    //get the profile of the logged in user
+    const profile = await Profile.findOne({ user: req.user.id });
+    //get the index
+    const removeIndex = profile.education
+      .map((item) => item.id)
+      .indexOf(req.params.edu_id);
+    //splicing out the index, only one
+    profile.education.splice(removeIndex, 1);
+    //save the change
+    await profile.save();
+
+    res.json(profile);
+
+    //so go to swagger
+    //in the json response, copy the _id of the education
+    //you want to test deleting.
+    //make a DELETE request to
+    // http://localhost:5000/api/profile/education/(that _id)
+    // add the token to the headers
+    // content-type not necessary
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error. DELETE api/profile/education/edu_id');
+  }
+});
 //export the router
 module.exports = router;
 
