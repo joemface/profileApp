@@ -406,4 +406,4 @@ module.exports = router;
 //copy and past token next to the header x-auth-token
 // token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYxMDcyMTkyMGYzZmQ0NjMwYjBkMTkxIn0sImlhdCI6MTU5NDkzMjEzOSwiZXhwIjoxNTk1MjkyMTM5fQ.QTOQRk1Zjq56CJ8GckvUluF036lbHYA64w520HzhYKg
 
-//temp token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNWYxMjM4MTE5MGNkMGUxMTljZTk1N2U1In0sImlhdCI6MTU5NTAyOTUyMSwiZXhwIjoxNTk1Mzg5NTIxfQ.J3A9VqHfNQTzDCfU0KgTZEWSvxmfiAseblJFiQwEZ2s
+//
